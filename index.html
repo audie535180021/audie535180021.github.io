@@ -20,23 +20,37 @@
         <div class="row">
           <h3>Beberapa Catatan & Cara menggunakan perekam suara :</h3>
           <ol class="ms-3">
-            <li>Tekan tombol yang bertulisan Start Recording (tombol akan berubah menjadi Stop Recording)</li>
+            <li>Tekan tombol yang bertulisan Start Recording untuk memulai perekaman suara</li>
             <!-- <li>Saat baru pertama kali mengunjungi halaman ini harap klik <a href="https://drive.google.com/file/d/1-GFm_P-W6PC_9qo46E_awNEpfbcAJj4h/view?usp=sharing" target="_new">Allow/Ijinkan menggunakan Microphone</a></li> -->
             <li>Tekan tombol Stop Recording untuk menyelesaikan perekaman suara</li>
             <li>Perekeman dapat dilakukan secara berulang kali, dan hasil rekaman juga dapat di preview terlebih dahulu</li>
-            <li>Setelah perekaman selesai, silahkan klik tombol <u style="color: blue">▼</u> atau tombol <i class="fas fa-ellipsis-v"></i> untuk mendownload file rekaman suara</li>
+            <li>Setelah perekaman selesai, silahkan klik tombol <i class="fas fa-play"></i> kemudian klik tombol <i class="fas fa-ellipsis-v"></i> untuk mendownload file rekaman suara</li>
           </ol>
         </div>
-        <div data-role="controls" class="mx-lg-auto my-lg-auto">
-          <button id="btnRecording" class="mb-3">Start Recording</button>
-        </div>
-        <div data-role="recordings" id="audioRecord" class="my-lg-auto"></div>
-      </div>
+    <div id="aud-recorder">
+      <button
+        type="button"
+        id="start-aud-recording"
+        onclick="startRecording(this,
+			document.getElementById('stop-aud-recording'))"
+      >
+        Start recording
+      </button>
+
+      <button
+        type="button"
+        id="stop-aud-recording"
+        disabled
+        onclick="stopRecording(this,
+			document.getElementById('start-aud-recording'))"
+      >
+        Stop recording
+      </button>
+    </div>
     </div>
 
     <script src="JS/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="JS/recordAudio.js"></script>
-    <script src="JS/index.js"></script>
+    <script src="JS/script.js"></script>
   </body>
 </html>
