@@ -11,6 +11,9 @@
       #audioRecord {
         width: 300px;
       }
+      body {
+        background-color: lightblue;
+      }
     </style>
   </head>
   <body>
@@ -24,33 +27,60 @@
             <!-- <li>Saat baru pertama kali mengunjungi halaman ini harap klik <a href="https://drive.google.com/file/d/1-GFm_P-W6PC_9qo46E_awNEpfbcAJj4h/view?usp=sharing" target="_new">Allow/Ijinkan menggunakan Microphone</a></li> -->
             <li>Tekan tombol Stop Recording untuk menyelesaikan perekaman suara</li>
             <li>Perekeman dapat dilakukan secara berulang kali, dan hasil rekaman juga dapat di preview terlebih dahulu</li>
-            <li>Setelah perekaman selesai, silahkan klik tombol <i class="fas fa-play"></i> kemudian klik tombol <i class="fas fa-ellipsis-v"></i> untuk mendownload file rekaman suara</li>
+            <li>Harap Berikan Input Nama (untuk generate format nama file rekaman)</li>
+            <li>
+              Kalimat yang diucapkan : <br />
+              <b>Perkenalkan Nama Saya _______ saat ini saya berusia ________ tahun</b> <br />
+              Contohnya sebagai berikut : <br />
+              <audio controls>
+                <source src="Audie_Milson_Sample1.wav" type="audio/wav" />
+              </audio>
+            </li>
+            <li>Setelah perekaman selesai, silahkan klik tombol <i class="fas fa-play"></i> untuk mendengarkan hasil rekaman suara</li>
+            <li>Setelah 5x menekan tombol stop recording, akan muncul button untuk mendownload semua file rekaman suara sekaligus</li>
+            <li>
+              Setelah mendownload file hasil rekaman, mohon bantuannya untuk mengisi dan mengupload file rekaman suara pada link google form berikut: <br /><a href="https://forms.gle/PcdHkg47jWr3CGpE6"
+                >https://forms.gle/PcdHkg47jWr3CGpE6</a
+              >
+            </li>
           </ol>
         </div>
-    <div id="aud-recorder">
-      <button
-        type="button"
-        id="start-aud-recording"
-        onclick="startRecording(this,
+        <div id="aud-recorder">
+          <button
+            type="button"
+            id="start-aud-recording"
+            onclick="startRecording(this,
 			document.getElementById('stop-aud-recording'))"
-      >
-        Start recording
-      </button>
+          >
+            Start recording
+          </button>
 
-      <button
-        type="button"
-        id="stop-aud-recording"
-        disabled
-        onclick="stopRecording(this,
+          <button
+            type="button"
+            id="stop-aud-recording"
+            disabled
+            onclick="stopRecording(this,
 			document.getElementById('start-aud-recording'))"
-      >
-        Stop recording
-      </button>
+          >
+            Stop recording
+          </button>
+        </div>
+      </div>
     </div>
+
+    <div class="container d-flex flex-column align-items-start justify-content-center tengah card p-3 mx-lg-auto my-lg-auto">
+      <table>
+        <tr>
+          <td><label for="inputName">Name </label></td>
+          <td><input type="text" id="inputName" name="inputName" class="mx-2 my-2" /></td>
+          <td><button id="downloadAll" style="visibility: hidden" onclick="getAllAudioTag()">Download All</button></td>
+        </tr>
+      </table>
+
+      <div id="result"></div>
     </div>
 
     <script src="JS/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="JS/script.js"></script>
   </body>
 </html>

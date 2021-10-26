@@ -1,4 +1,5 @@
 let chunks = [];
+let blobArr = [];
 
 document.getElementById(`aud-recorder`).style.display = 'block';
 
@@ -17,6 +18,10 @@ function startRecording(thisButton, otherButton) {
       chunks.push(e.data);
     };
     mediaRecorder.onstop = () => {
+      var currentVal = localStorage.getItem('myClicks') ? parseInt(localStorage.getItem('myClicks')) : 0;
+      var newVal = currentVal + 1;
+      localStorage.setItem('myClicks', newVal);
+
       const blob = new Blob(chunks, {
         type: 'audio/wav',
       });
@@ -26,8 +31,13 @@ function startRecording(thisButton, otherButton) {
       recordedMedia.setAttribute('class', 'd-flex flex-columns my-2');
       recordedMedia.controls = true;
       const recordedMediaURL = URL.createObjectURL(blob);
+      blobArr.push(URL.createObjectURL(blob));
       recordedMedia.src = recordedMediaURL;
-      document.getElementById(`aud-recorder`).append(recordedMedia);
+      document.getElementById(`result`).append(recordedMedia);
+
+      if (blobArr.length >= 5) {
+        document.getElementById('downloadAll').style.visibility = 'visible';
+      }
     };
 
     thisButton.disabled = true;
@@ -43,4 +53,28 @@ function stopRecording(thisButton, otherButton) {
 
   thisButton.disabled = true;
   otherButton.disabled = false;
+}
+
+function getAllAudioTag(e) {
+  var fileName = document.getElementById('inputName').value;
+  if (fileName === '') {
+    fileName = 'anonym';
+  }
+
+  var ulist = document.createElement('ul');
+  var listItem;
+  for (var i = 0; i < blobArr.length; i++) {
+    var li = document.createElement('li');
+    var sequence = i + 1;
+    var a = document.createElement('a');
+    var link = document.createTextNode('This is link');
+    a.appendChild(link);
+    a.href = blobArr[i];
+    a.download = fileName + sequence + '.wav';
+    a.click();
+    a.setAttribute('class', 'audio-result');
+    li.appendChild(a);
+    ulist.appendChild(li);
+    ulist.style.display = 'none';
+  }
 }
